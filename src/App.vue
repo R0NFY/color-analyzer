@@ -1,7 +1,10 @@
 <template>
-<WelcomePage />
+<Background />
+<router-link to="/"></router-link>
+<router-link to="/colors"></router-link>
+<router-view />
 </template>
 
 <script setup>
-import WelcomePage from '@/components/WelcomePage.vue'
+import Background from '@/components/Background.vue'
 </script>
