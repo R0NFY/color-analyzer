@@ -3,3 +3,12 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .app-el {
+    @apply shadow-lg rounded-[calc(min(1vw_+_1vh,_2rem))];
+  }
+  .margin {
+    @apply mt-12 md:mt-14 lg:mt-16;
+  }
+}

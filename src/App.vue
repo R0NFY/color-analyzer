@@ -1,7 +1,5 @@
 <template>
 <Background />
-<router-link to="/"></router-link>
-<router-link to="/colors"></router-link>
 <router-view />
 </template>
 

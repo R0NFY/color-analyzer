@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-pattern h-full w-screen absolute z-[-1] bg-cover bg-center blur-[calc(4.5vw_+_4.5vh)]" id="pattern"></div>
+    <div class="bg-pattern h-full w-screen absolute z-[-1] bg-cover bg-center blur-[calc(4.5vw_+_4.5vh)] top-0" id="pattern"></div>
 </template>
 
 <script setup>
