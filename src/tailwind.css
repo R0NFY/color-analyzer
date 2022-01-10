@@ -1,0 +1,36 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .app-el {
+    @apply shadow-lg rounded-[calc(min(1vw_+_1vh,_2rem))];
+  }
+  .margin {
+    @apply mt-12 md:mt-14 lg:mt-16;
+  }
+  .white {
+    filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(253deg)
+      brightness(103%) contrast(106%);
+  }
+  .state {
+    filter: brightness(1);
+  }
+  #img {
+    transition: filter 0.15s ease-in;
+  }
+  .darken #img {
+    filter: brightness(0.5);
+  }
+  #wrapper .show {
+    visibility: hidden;
+  }
+  #wrapper:hover .show {
+    visibility: visible;
+  }
+  .heading {
+    @apply text-4xl leading-tight sm:leading-tight sm:text-5xl md:text-6xl md:leading-tight xl:text-7xl font-semibold xl:leading-tight;
+  }
+}
