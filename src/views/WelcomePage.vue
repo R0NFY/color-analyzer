@@ -1,7 +1,7 @@
 <template>
   <div class="font-poppins text-center h-[97vh] grid place-items-center text-dark select-none">
     <div class="grid gap-5 sm:gap-6 md:gap-8 w-10/12 xl:w-10/12 max-w-[25rem] sm:max-w-[30rem] md:max-w-[38rem] xl:max-w-[840px] relative">
-      <h1 class="text-4xl leading-tight sm:leading-tight sm:text-5xl md:text-6xl md:leading-tight xl:text-7xl font-semibold xl:leading-tight" id="title">Get a bit more than just a palette</h1>
+      <h1 class="heading" id="title">Get a bit more than just a palette</h1>
       <p class="text-xl sm:text-2xl md:text-3xl xl:text-[44px] xl:leading-normal" id="desc">It's easier to pick the right color when you see it in context. </p>
       <div>
         <input type="file" accept="image/*" id="file" class="absolute w-[0.1px] h-[0.1px] opacity-0 overflow-hidden z-[-1]" @change="setPath">
@@ -52,6 +52,7 @@ const router = useRouter()
 
 let setPath = (el) => {
   let file = el.target.files[0]
+  store.commit('setSize', file.size)
   if (file.type.includes('image')) {
     const fileReader = new FileReader() 
     fileReader.readAsDataURL(file)

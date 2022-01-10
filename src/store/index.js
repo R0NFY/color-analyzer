@@ -8,10 +8,14 @@ const vuexLocal = new VuexPersistence({
 export default createStore({
   state: {
     path: "",
+    size: Number,
   },
   mutations: {
     setPath(state, newPath) {
       state.path = newPath;
+    },
+    setSize(state, newSize) {
+      state.size = newSize;
     },
   },
   plugins: [vuexLocal.plugin],

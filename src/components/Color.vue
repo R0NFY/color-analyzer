@@ -4,6 +4,6 @@
 
 <script setup>
     defineProps({
-        hexValue: String
+        hexValue: String, 
     })
 </script>
