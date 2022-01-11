@@ -56,7 +56,7 @@ import 'animate.css'
 gsap.defaults({
     ease: 'sine.easeInOut',
     duration: 0.75, 
-    opacity: 0, 
+    autoAlpha: 0, 
     delay: 0.33
 })
 
@@ -78,7 +78,7 @@ let mainAnimation = () => {
             gsap.from('#fixed', {y:-15, delay: 0.15})
             gsap.from('#palette', {x: 24})
             gsap.from('#tip', {x: 35, y:15})
-            again ? gsap.from('#upload-again', {y:15, opacity: 1}) : ''
+            again ? gsap.from('#upload-again', {y:15}) : ''
             warning ? gsap.from('#warning', {y: 20}) : ''
         }
     }
@@ -159,11 +159,11 @@ watch (
     () => activeColor.value, 
     () => {
         if (loaded.value) {
-            gsap.to('#fixed', {backgroundColor: activeColor.value.hex, opacity: 1})
+            gsap.to('#fixed', {backgroundColor: activeColor.value.hex, autoAlpha: 1})
             loaded.value = false
         }
         else {
-            gsap.to('#fixed', {backgroundColor: activeColor.value.hex, opacity: 1, delay: 0, duration: 0.15})
+            gsap.to('#fixed', {backgroundColor: activeColor.value.hex, autoAlpha: 1, delay: 0, duration: 0.15})
         }
     }
 )

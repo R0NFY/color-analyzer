@@ -23,7 +23,7 @@ import gsap from 'gsap'
 gsap.defaults({
     ease: 'sine.easeInOut',
     duration: 0.75, 
-    opacity: 0, 
+    autoAlpha: 0, 
     delay: 0.33
 })
 
