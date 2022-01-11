@@ -4,7 +4,7 @@
         <div v-if="size < 1024 || allowed" class="relative grid place-items-center margin">
             <input accept="image/*" type="file" class="absolute w-[0.1px] h-[0.1px] opacity-0 overflow-hidden z-[-1]" id="reupload" @change="reupload">
             <label for="reupload" class="grid place-items-center relative state hover:darken hover:cursor-pointer" id="wrapper">
-                <img @load="backupAnimation" :src="source" alt="image uploaded by user" class="relative app-el h-[40vw] max-w-[90%] max-h-[30rem] mx-auto object-cover" id="img">
+                <img :src="source" alt="image uploaded by user" class="relative app-el h-[40vw] max-w-[90%] max-h-[30rem] mx-auto object-cover" id="img">
                 <div class="flex items-center gap-1 absolute invisible show transition-opacity z-50" id="upload-again">
                     <img src="@/assets/repeat-outline.svg" class="text-light white w-6 sm:w-7 md:w-8 lg:w-10">
                     <p class="text-light font-medium text-base sm:text-xl md:text-2xl lg:text-3xl">new?</p>
@@ -42,7 +42,6 @@ import ColoredExamples from '@/components/ColoredExamples.vue'
 import { useStore } from 'vuex'
 import { reactive, ref } from '@vue/reactivity'
 import { onMounted, watch } from '@vue/runtime-core'
-import { useRouter } from 'vue-router'
 
 // libraries
 
@@ -61,28 +60,32 @@ gsap.defaults({
     delay: 0.33
 })
 
-onMounted(() => {
-        if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-            let img = document.getElementById('img')
-            let warning = document.getElementById('warning')
-            let again = document.getElementById('upload-again')
-            if (window.innerWidth > 768) {
-                gsap.from('#fixed', {y: -35})
-                img ? gsap.from('#img', {y: 50}) : ''
-                gsap.from('#palette', {x: 75})
-                gsap.from('#tip', {x: 75, y: 25})
-                again ? gsap.from('#upload-again', {y:25, opacity: 1}) : ''
-                warning ? gsap.from('#warning', {y: 30}) : ''
-            }
-            else {
-                img ? gsap.from('#img', {y: -30}) : ''
-                gsap.from('#fixed', {y:-15, delay: 0.15})
-                gsap.from('#palette', {x: 24})
-                gsap.from('#tip', {x: 35, y:15})
-                again ? gsap.from('#upload-again', {y:15, opacity: 1}) : ''
-                warning ? gsap.from('#warning', {y: 20}) : ''
-            }
+let mainAnimation = () => {
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        let img = document.getElementById('img')
+        let warning = document.getElementById('warning')
+        let again = document.getElementById('upload-again')
+        if (window.innerWidth > 768) {
+            gsap.from('#fixed', {y: -35})
+            img ? gsap.from('#img', {y: 50}) : ''
+            gsap.from('#palette', {x: 75})
+            gsap.from('#tip', {x: 75, y: 25})
+            again ? gsap.from('#upload-again', {y:25}) : ''
+            warning ? gsap.from('#warning', {y: 30}) : ''
         }
+        else {
+            img ? gsap.from('#img', {y: -30}) : ''
+            gsap.from('#fixed', {y:-15, delay: 0.15})
+            gsap.from('#palette', {x: 24})
+            gsap.from('#tip', {x: 35, y:15})
+            again ? gsap.from('#upload-again', {y:15, opacity: 1}) : ''
+            warning ? gsap.from('#warning', {y: 20}) : ''
+        }
+    }
+}
+
+onMounted(() => {
+        mainAnimation()
     })
 
 // main logic
@@ -95,27 +98,18 @@ let activeColor = ref('')
 let loaded = ref(true)
 let size = store.state.size ? store.state.size / 1024 : 0
 
-let backupAnimation = () => {
-    if (size > 1024 && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        let img = document.getElementById('img')
-        img ? gsap.from('#img', {delay: 0, opacity: 0, duration: 1}) : ''
-    }
-}
-
 let allowImg = () => {
     allowed.value = true
 }
 
-let source = store.state.path
+let source = ref(store.state.path)
 
-if (source) {
-    Vibrant.from(source).getPalette().then(palette => {
+if (source.value) {
+    Vibrant.from(source.value).getPalette().then(palette => {
         colors.value = palette
         activeColor.value = colors.value.Vibrant
     })
 }
-
-const router = useRouter()
 
 let reupload = el => {
     let file = el.target.files[0]
@@ -125,12 +119,14 @@ let reupload = el => {
         fileReader.readAsDataURL(file)
         loaded.value = true
         fileReader.onload = e => {
-        store.commit('setPath', e.target.result)
-        router.push('colors')
-        
+            store.commit('setPath', e.target.result)
+            source.value = e.target.result
+            Vibrant.from(source.value).getPalette().then(palette => {
+                colors.value = palette
+                activeColor.value = colors.value.Vibrant
+            })
         }
         valid.value = true
-        location.reload()
     }
     else {
         valid.value = false
