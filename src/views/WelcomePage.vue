@@ -69,7 +69,6 @@ let mainAnimation = direction => {
 
 onMounted(() => {
   if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    console.log('it is MOUNTED');
     mainAnimation(1)
   }
 })
