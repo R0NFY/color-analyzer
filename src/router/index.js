@@ -1,4 +1,6 @@
-import { createRouter, createWebHistory } from "vue-router";
+// import { from } from "core-js/core/array";
+import { createRouter, createWebHashHistory } from "vue-router";
+import store from "@/store/index.js";
 
 const routes = [
   {
@@ -14,8 +16,15 @@ const routes = [
 ];
 
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHashHistory(),
   routes,
+});
+
+router.beforeEach((to) => {
+  let source = store.state.path;
+  if (!source && to.path == "/colors") {
+    return "/";
+  }
 });
 
 export default router;

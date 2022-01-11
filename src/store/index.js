@@ -5,7 +5,7 @@ const vuexLocal = new VuexPersistence({
   storage: window.localStorage,
 });
 
-export default createStore({
+const store = createStore({
   state: {
     path: "",
     size: Number,
@@ -20,3 +20,5 @@ export default createStore({
   },
   plugins: [vuexLocal.plugin],
 });
+
+export default store;
