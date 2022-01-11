@@ -5,7 +5,7 @@
             <input accept="image/*" type="file" class="absolute w-[0.1px] h-[0.1px] opacity-0 overflow-hidden z-[-1]" id="reupload" @change="reupload">
             <label for="reupload" class="grid place-items-center relative state hover:darken hover:cursor-pointer" id="wrapper">
                 <img :src="source" alt="image uploaded by user" class="relative app-el h-[40vw] max-w-[90%] max-h-[30rem] mx-auto object-cover" id="img">
-                <div class="flex items-center gap-1 absolute invisible show transition-opacity z-50" id="upload-again">
+                <div class="flex items-center gap-1 absolute show transition-opacity z-50" id="upload-again">
                     <img src="@/assets/repeat-outline.svg" class="text-light white w-6 sm:w-7 md:w-8 lg:w-10">
                     <p class="text-light font-medium text-base sm:text-xl md:text-2xl lg:text-3xl">new?</p>
                 </div>
@@ -56,7 +56,7 @@ import 'animate.css'
 gsap.defaults({
     ease: 'sine.easeInOut',
     duration: 0.75, 
-    autoAlpha: 0, 
+    opacity: 0, 
     delay: 0.33
 })
 
@@ -159,11 +159,11 @@ watch (
     () => activeColor.value, 
     () => {
         if (loaded.value) {
-            gsap.to('#fixed', {backgroundColor: activeColor.value.hex, autoAlpha: 1})
+            gsap.to('#fixed', {backgroundColor: activeColor.value.hex, opacity: 1})
             loaded.value = false
         }
         else {
-            gsap.to('#fixed', {backgroundColor: activeColor.value.hex, autoAlpha: 1, delay: 0, duration: 0.15})
+            gsap.to('#fixed', {backgroundColor: activeColor.value.hex, opacity: 1, delay: 0, duration: 0.15})
         }
     }
 )

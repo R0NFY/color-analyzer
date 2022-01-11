@@ -22,7 +22,8 @@ const router = createRouter({
 
 router.beforeEach((to) => {
   let source = store.state.path;
-  if (!source && to.path == "/colors") {
+  console.log(to);
+  if (!source && to.name == "colors") {
     return "#";
   }
 });
