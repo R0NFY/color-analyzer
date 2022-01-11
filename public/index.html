@@ -4,12 +4,19 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <meta property="twitter:card">
-    <meta property="twitter:site">
-    <meta property="og:description" content="Get a bit more than just a palette">
-    <meta property="og:title" content="Colors Analyzer">
-    <meta property="og:image" content="https://i.imgur.com/WdjN2vk.png">
-    <meta property="og:url" content="https://color-analyzer.netlify.app/#/" />
+    <meta name="description" content="Get a bit more than just a palette">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary" key="twcard" />
+    <meta name="twitter:creator" content={twitterHandle} key="twhandle" />
+
+    <!-- Open Graph -->
+    <meta property="og:url" content={currentURL} key="ogurl" />
+    <meta property="og:image" content="https://i.imgur.com/WdjN2vk.png" key="ogimage" />
+    <meta property="og:site_name" content={siteName} key="ogsitename" />
+    <meta property="og:title" content={pageTitle} key="ogtitle" />
+    <meta property="og:description" content={description} key="ogdesc" />
+    
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
     <title><%= htmlWebpackPlugin.options.title %></title>
   </head>
