@@ -73,14 +73,6 @@ let mainAnimation = () => {
             again ? gsap.from('#upload-again', {y:25}) : ''
             warning ? gsap.from('#warning', {y: 30}) : ''
         }
-        else {
-            img ? gsap.from('#img', {y: -30}) : ''
-            gsap.from('#fixed', {y:-15, delay: 0.15})
-            gsap.from('#palette', {x: 24})
-            gsap.from('#tip', {x: 35, y:15})
-            again ? gsap.from('#upload-again', {y:15}) : ''
-            warning ? gsap.from('#warning', {y: 20}) : ''
-        }
     }
 }
 

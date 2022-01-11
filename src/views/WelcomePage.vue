@@ -40,11 +40,6 @@ let mainAnimation = direction => {
       gsap.from('#desc', {x: -100})
       gsap.from('#upload', {y: 75})
     }
-    else {
-      gsap.from('#title', {x:25})
-      gsap.from('#desc', {x: -50})
-      gsap.from('#upload', {y: 33})
-    }
     gsap.to('#title', {opacity: 1, x: 0})
     gsap.to('#desc', {opacity: 1, x: 0})
     gsap.to('#upload', {opacity: 1, y: 0})
@@ -58,11 +53,6 @@ let mainAnimation = direction => {
       gsap.to('#title', {x: 50})
       gsap.to('#desc', {x: -100})
       gsap.to('#upload', {y: 75})
-    }
-    else {
-      gsap.to('#title', {x:25})
-      gsap.to('#desc', {x: -50})
-      gsap.to('#upload', {y: 33})
     }
   }
 }

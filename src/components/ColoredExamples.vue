@@ -33,10 +33,6 @@ onMounted(() => {
             gsap.from('#example-heading', {y:50})
             gsap.from('#examples', {x: 50})
         }
-        else {
-            gsap.from('#example-heading', {y:25})
-            gsap.from('#examples', {x: 25})
-        }
     }
 })
 
