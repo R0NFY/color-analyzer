@@ -29,18 +29,44 @@ gsap.defaults({
   delay: 0.33
 })
 
-onMounted(() => {
-  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+let mainAnimation = direction => {
+  if (direction == 1) {
+    gsap.defaults({
+      duration: 0.75, 
+      delay: 0.33
+    })
     if (window.innerWidth > 768) {
-      gsap.from('#title', {x: 50, duration: 0.75})
+      gsap.from('#title', {x: 50})
       gsap.from('#desc', {x: -100})
       gsap.from('#upload', {y: 75})
     }
     else {
-      gsap.from('#title', {x:25, duration: 0.75})
+      gsap.from('#title', {x:25})
       gsap.from('#desc', {x: -50})
       gsap.from('#upload', {y: 33})
     }
+  }
+  else {
+    gsap.defaults({
+      duration: 0.5, 
+      delay: 0
+    })
+    if (window.innerWidth > 768) {
+      gsap.to('#title', {x: 50})
+      gsap.to('#desc', {x: -100})
+      gsap.to('#upload', {y: 75})
+    }
+    else {
+      gsap.to('#title', {x:25})
+      gsap.to('#desc', {x: -50})
+      gsap.to('#upload', {y: 33})
+    }
+  }
+}
+
+onMounted(() => {
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    mainAnimation(1)
   }
 })
 
@@ -58,7 +84,10 @@ let setPath = (el) => {
     fileReader.readAsDataURL(file)
     fileReader.onload = e => {
       store.commit('setPath', e.target.result)
-      router.push('colors')
+      mainAnimation(-1)
+      setTimeout(() => {
+        router.push('colors')
+      }, 500)
     }
     valid.value = true
   }
